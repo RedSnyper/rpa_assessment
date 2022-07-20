@@ -2,7 +2,9 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional, List
 from datetime import datetime
 
-from app.schemas.user import UserResponse
+class UserResponse(BaseModel):
+    full_name: str
+    email: EmailStr
 
 class VideoCreate(BaseModel):
     vid_title: str
@@ -12,6 +14,7 @@ class VideoResponse(BaseModel):
     vid_title : str
     vid_desc: Optional[str]
     vid_URI: str
+    upload_cost: float
     class Config:
         orm_mode = True
 
@@ -19,8 +22,7 @@ class VideoDetailResponse(VideoResponse):
     vid_len: int
     vid_size: int
     vid_type: str
-    upload_cost: float
     uploaded_at: datetime
-    user: UserResponse.email
+    user: UserResponse
     class Config:
         orm_mode = True

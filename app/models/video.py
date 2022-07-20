@@ -18,8 +18,6 @@ class Video(Base):
     )
     u_id = Column(Integer, ForeignKey('users.u_id', ondelete='CASCADE'))
     
-
-
     user = relationship("User", back_populates = "videos")
 
 
