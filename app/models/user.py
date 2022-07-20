@@ -1,6 +1,6 @@
 from sqlalchemy.sql.expression import text
 from ..database.db import Base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy.orm import relationship
 
@@ -11,7 +11,7 @@ class User(Base):
     email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False) #this is hashed password
     vid_count = Column(Integer, server_default=text('0'))
-
+    total_spent = Column(Float, server_default=text('0'))
     created_at = Column(
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
     )
