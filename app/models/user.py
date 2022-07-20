@@ -14,9 +14,7 @@ class User(Base):
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
     )
 
-
-
-    videos = relationship('Video',back_popuates="user")
+    videos = relationship('Video',back_populates="user")
 
 
 

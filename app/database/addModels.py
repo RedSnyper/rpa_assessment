@@ -1,6 +1,5 @@
-from ..models import User, Video
-from .db import engine
+from ..models import user, video
+from .db import engine, Base
 
 def add_models_to_database() -> None:
-    User.Base.metadata.create_all(bind=engine)
-    Video.Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
