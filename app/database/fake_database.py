@@ -29,8 +29,11 @@ def generate_fake_user(n: int = 1) -> None:
 
 def generate_fake_videos(n: int = 1) -> None:
         try:
-            user_id:list = get_all_users_id()
+            user_ids:list = get_all_users_id()
             for _ in range(n):
+                u_id = random.choice(user_ids)
+                user:User = db.query(User).filter(User.u_id == u_id).first()
+                user.vid_count += 1
                 fake_video = {
                     "vid_title": fake_gen.name(),
                     "vid_desc": fake_gen.text(),
@@ -39,9 +42,8 @@ def generate_fake_videos(n: int = 1) -> None:
                     "vid_size": random.randint(1, 1024 ** 3) ,#in bytes 2**30 < 2**32 
                     "vid_type": random.choice(['mkv','mp4']),
                     "upload_cost": round(random.uniform(17, 40),2),
-                    "u_id": random.choice(user_id)
-                }
-                
+                    "u_id": u_id
+                }            
                 db.add(Video(**fake_video))
                 db.commit()
         except exc.SQLAlchemyError as err:

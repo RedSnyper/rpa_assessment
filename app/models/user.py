@@ -10,6 +10,8 @@ class User(Base):
     full_name = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False) #this is hashed password
+    vid_count = Column(Integer, server_default=text('0'))
+
     created_at = Column(
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
     )
