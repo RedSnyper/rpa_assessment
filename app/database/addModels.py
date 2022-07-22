@@ -1,4 +1,3 @@
-from ..models import user, video
 from .db import engine, Base
 
 def add_models_to_database() -> None:
