@@ -1,25 +1,28 @@
 from pydantic import BaseModel, EmailStr
 from typing import List
-
+from datetime import datetime
 from app.schemas.video import VideoResponse
 
-
-
-class UserCreate(BaseModel):
-    full_name: str
+class UserReq(BaseModel):
+    full_name : str
     email: EmailStr
     password: str
 
-class UserResponse(BaseModel):
-    u_id: int
-    email: EmailStr
-    full_name : str
+class UserDetail(BaseModel):
+    total_spent: float
     vid_count: int
-    total_spent: int
+    class Config: 
+        orm_mode = True
+
+class UserRes(BaseModel):
+    id: str
+    full_name: str
+    email: EmailStr
+    created_at: datetime
     class Config:
         orm_mode = True
 
-class UserDetailResponse(UserResponse):
-    videos: List[VideoResponse] = []
+class UserDetailRes(UserRes):
+    detail: List[UserDetail]
     class Config: 
         orm_mode = True
